@@ -14,7 +14,7 @@ template<typename T = std::string>
 void bar(T = "") {}
 
 int main(int argc, char *argv[]) {
-    foo(1); // T 被推断为 int，调用 foo<int>(i)
+    foo(1); // T 被推断为 int，调用 foo<int>(1)
 
     foo(); // ERROR: 无法推断 T 的类型
 
