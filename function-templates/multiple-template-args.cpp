@@ -87,15 +87,15 @@ int main(int argc, char *argv[]) {
     auto val1 = max<int, int, long>(1, 2);
 
     // 改变模板参数顺序，只需指明第一个模板参数，后续的参数通过类型推断
-    // 可见模板参数的顺序很考究
+    // 可见模板参数的顺序很有讲究
     auto val2 = max_optimized_1<double>(1, 2);
 
     int x = 1, y = 2;
     const int &rx = x, &ry = y;
 #if __cplusplus >= 201103L && __cplusplus < 201402L
-    // auto v1 = max_optimized_cpp11(rx, ry);
+    auto v1 = max_optimized_cpp11(rx, ry);
     // auto v = max_optimized_cpp11_decay(rx, ry);
-    auto vv = max_optimized_cpp11_common_type(rx, ry);
+    // auto vv = max_optimized_cpp11_common_type(rx, ry);
 #else
     auto v2 = max_optimized_cpp14(rx, ry);
 #endif

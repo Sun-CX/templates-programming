@@ -6,3 +6,6 @@ add_executable(default-param-in-function-template default-param-in-function-temp
 find_package(Boost REQUIRED)
 add_executable(multiple-template-args multiple-template-args.cpp)
 target_link_libraries(multiple-template-args PRIVATE Boost::boost)
+
+add_executable(default-template-args default-template-args.cpp)
+add_executable(function-template-overload function-template-overload.cpp)
