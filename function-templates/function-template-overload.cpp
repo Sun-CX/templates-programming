@@ -40,6 +40,49 @@ const char *max(const char *x, const char *y) {
     return std::strcmp(x, y) < 0 ? y : x;
 }
 
+// --------------------------------- puzzled example ---------------------------------
+// maximum of two values of any type (call-by-reference)
+template<typename T>
+const T &max_p(const T &x, const T &y) {
+    cout << "max_p -- 1 invoked." << endl;
+    return x < y ? y : x;
+}
+
+// maximum of two C-strings (call-by-value)
+const char *max_p(const char *x, const char *y) {
+    cout << "max_p -- 2 invoked." << endl;
+    return std::strcmp(x, y) < 0 ? y : x;
+}
+
+// maximum of three values of any type (call-by-reference)
+template<typename T>
+const T &max_p(const T &x, const T &y, const T &z) {
+    cout << "max_p -- 3 invoked." << endl;
+    cout << type_id_with_cvr<T>().pretty_name() << endl;
+    cout << type_id_with_cvr<decltype(x)>().pretty_name() << endl;
+    return max_p(max_p(x, y), z);
+}
+
+// --------------------------------- 出场顺序很重要 ---------------------------------
+// maximum of two values of any type
+template<typename T>
+T max_o(T x, T y) {
+    cout << "max_o -- 1 invoked." << endl;
+    return x < y ? y : x;
+}
+
+// maximum of three values of any type
+template<typename T>
+T max_o(T x, T y, T z) {
+    cout << "max_o -- 2 invoked." << endl;
+    return max_o(max_o(x, y), z); // 调用了模板函数 max_o<int>，因为下面的非模板函数的定义出现得太晚了，如果该函数定义出现在此函数之前，则会优先选择调用非模板函数
+}
+
+int max_o(int x, int y) {
+    cout << "max_o -- 3 invoked." << endl;
+    return x < y ? y : x;
+}
+
 int main(int argc, char *argv[]) {
 
     /* 一个非模板函数可以和一个与其同名的函数模板共存，并且这个同名的函数模板
@@ -79,6 +122,18 @@ int main(int argc, char *argv[]) {
     const char *hy = "world";
 
     auto m4 = ::max(hx, hy); // 调用 max<const char *, const char *> 函数模板
+
+    // --------------------------------------------------------
+    auto k1 = ::max_p(7, 42, 68);
+
+    const char *n1 = "frederic";
+    const char *n2 = "anica";
+    const char *n3 = "lucas";
+
+    // ERROR: 运行时错误，在调用 max_p(const char *x, const char *y) 返回了一个临时变量
+    auto k2 = ::max_p(n1, n2, n3);
+
+    ::max_o(47, 11, 33);
 
     return 0;
 }
