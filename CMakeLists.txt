@@ -7,3 +7,5 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit-frame-pointer")
 
 add_subdirectory(function-templates)
+add_subdirectory(class-templates)
+add_subdirectory(non-type-templates-args)
