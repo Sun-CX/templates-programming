@@ -6,6 +6,7 @@
 #include <type_traits>
 #include <iostream>
 
+// C++ 17 开始支持
 template<typename T, auto MaxSize>
 class Stack {
 public:

@@ -9,3 +9,5 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fno-omit
 add_subdirectory(function-templates)
 add_subdirectory(class-templates)
 add_subdirectory(non-type-templates-args)
+add_subdirectory(variadic-template)
+add_subdirectory(tricky-basics)
