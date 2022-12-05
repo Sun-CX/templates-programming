@@ -1,0 +1,1 @@
+add_executable(perfect-forwarding perfect-forwarding.cpp)
