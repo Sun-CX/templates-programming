@@ -37,6 +37,22 @@ void printByIdx(T v, Indices<Idx...>) {
     print(get<Idx>(v)...);
 }
 
+template<size_t ...>
+class index_sequence {
+};
+
+template<size_t N>
+using make_index_sequence = index_sequence<__integer_pack(N)...>;
+
+template<size_t ... idx>
+void print(index_sequence<idx...>) {
+    size_t arr[] = {idx...};
+    for (const auto e: arr) {
+        cout << e << ' ';
+    }
+    cout << endl;
+}
+
 int main(int argc, char *argv[]) {
 
     // vector<string> v = {"good", "times", "say", "bye"};
@@ -46,5 +62,6 @@ int main(int argc, char *argv[]) {
     array<string, 5> arr = {"Hello", "my", "new", "!", "World"};
     printByIdx(arr, Indices<0, 4, 3>());
 
+    print(make_index_sequence<6>());
     return 0;
 }
